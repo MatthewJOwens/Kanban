@@ -34,7 +34,7 @@ class TasksService {
       throw new BadRequest("Invalid ID or you do not own this task");
     }
   }
-  async getCommentByTaskId(taskId) {
+  async getCommentsByTaskId(taskId) {
     let data = await dbContext.Comments.find({ taskId: taskId })
     if (!data) {
       throw new BadRequest("Invalid Comment ID or you do not own this comment")

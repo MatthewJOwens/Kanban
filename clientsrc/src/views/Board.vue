@@ -3,30 +3,30 @@
     <h1 v-if="board.title">{{board.title}}</h1>
     <h1 v-else>Loading...</h1>
     <div class="d-flex flex-row items-start">
-      <Column
-        v-for="column in columns"
-        :key="column.id"
-        :columnData="column"
-      >The column component has not loaded.</Column>
-      <div v-if="showColumn">
-        <input type="text" v-model="newColumn.title" placeholder="Column title" />
+      <List
+        v-for="list in lists"
+        :key="list.id"
+        :listData="list"
+      >The list component has not loaded.</List>
+      <div v-if="showList">
+        <input type="text" v-model="newList.title" placeholder="List title" />
       </div>
-      <div v-else @click="showColumn = !showColumn">
-        <p>Add Column</p>
-        <button class="btn btn-primary" @submit.prevent="addColumn()" />
+      <div v-else @click="showList = !showList">
+        <p>Add List</p>
+        <button class="btn btn-primary" @submit.prevent="addList()" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Column from "../components/Column.vue";
+import List from "../components/List.vue";
 export default {
   name: "board",
   data() {
     return {
-      showColumn: false,
-      newColumn: {}
+      showList: false,
+      newList: {}
     };
   },
   computed: {
@@ -42,16 +42,16 @@ export default {
     this.$store.dispatch("getProfile");
   },
   methods: {
-    newColumn() {
+    newList() {
       // TODO Finish writing method to add Column after writing back end
       // this.newColumn.
-      this.$store.dispatch("addColumn", this.newColumn);
+      this.$store.dispatch("addList", this.newList);
       // TODO need to add to store
     }
   },
   props: ["boardId"],
   components: {
-    Column
+    List
   }
 };
 </script>

@@ -1,14 +1,14 @@
 <template>
-  <div class="columnComponent p-2 mb-2 shadow rounded">
+  <div class="listComponent p-2 mb-2 shadow rounded">
     <!-- <div class="col-3"></div> -->
-    <p>Column Component loaded.</p>
+    <p>List Component loaded.</p>
   </div>
 </template>
 
 
 <script>
 export default {
-  name: "columnComponent",
+  name: "listComponent",
   data() {
     return {};
   },
@@ -20,7 +20,7 @@ export default {
 
 
 <style scoped>
-.columnComponent {
+.listComponent {
   min-width: 350px;
 }
 </style>

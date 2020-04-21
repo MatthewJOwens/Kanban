@@ -34,7 +34,7 @@ class ListsService {
       throw new BadRequest("Invalid ID or you do not own this list");
     }
   }
-  async getTaskByListId(listId) {
+  async getTasksByListId(listId) {
     let data = await dbContext.Tasks.find({ listId: listId })
     if (!data) {
       throw new BadRequest("Invalid Task ID or you do not own this task")
