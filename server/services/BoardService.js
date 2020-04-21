@@ -34,7 +34,13 @@ class BoardService {
       throw new BadRequest("Invalid ID or you do not own this board");
     }
   }
-
+  async getListByBoardId(boardId) {
+    let data = await dbContext.Lists.find({ boardId: boardId })
+    if (!data) {
+      throw new BadRequest("Invalid List ID or you do not own this list")
+    }
+    return data
+  }
 }
 
 
