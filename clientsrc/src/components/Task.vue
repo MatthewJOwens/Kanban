@@ -11,7 +11,7 @@ export default {
   data() {
     return {};
   },
-  mounted: {},
+  mounted() {},
   computed: {
     // comments(){
     //   return this.$store.state.comments
