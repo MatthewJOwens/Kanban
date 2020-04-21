@@ -53,7 +53,7 @@ export default {
     },
     async logout() {
       this.$store.dispatch("resetBearer");
-      await this.$auth.logout(window.location.origin);
+      await this.$auth.logout({returnTo: window.location.origin});
     }
   },
   computed: {

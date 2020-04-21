@@ -10,11 +10,11 @@
       >The list component has not loaded.</List>
       <div v-if="showList">
         <input type="text" v-model="newList.title" placeholder="List title" />
+        <button class="btn btn-primary" @submit.prevent="addList()">Submit</button>
       </div>
-      <div v-else @click="showList = !showList">
-        <p>Add List</p>
-        <button class="btn btn-primary" @submit.prevent="addList()" />
+      <div v-else @click="showList = !showList">Add List
       </div>
+      <p>{{lists}}</p>
     </div>
   </div>
 </template>
@@ -36,13 +36,18 @@ export default {
     },
     profile() {
       return this.$store.state.user;
+    },
+    lists() {
+      return this.$store.state.lists;
     }
   },
   created() {
     this.$store.dispatch("getProfile");
+    this.$store.dispatch("getActiveBoard", this.$route.params.boardId);
+    this.$store.dispatch("getLists", this.$route.params.boardId);
   },
   methods: {
-    newList() {
+    addList() {
       // TODO Finish writing method to add Column after writing back end
       // this.newColumn.
       this.$store.dispatch("addList", this.newList);
