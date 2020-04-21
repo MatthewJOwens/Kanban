@@ -7,7 +7,10 @@
       <button type="submit">Create Board</button>
     </form>
     <div v-for="board in boards" :key="board.id">
-      <router-link :to="{name: 'board', params: {boardId: board.id}}">{{}}">{{board.title}}</router-link>
+      <router-link
+        :to="{name: 'board', params: {boardId: board.id}}"
+        @click="setActiveBoard(board)"
+      >{{board.title}}</router-link>
     </div>
   </div>
 </template>
@@ -29,12 +32,23 @@ export default {
   computed: {
     boards() {
       return this.$store.state.boards;
+    },
+    profile() {
+      return this.$store.state.user;
     }
+  },
+  created() {
+    this.$store.dispatch("getProfile");
   },
   methods: {
     addBoard() {
       this.$store.dispatch("addBoard", this.newBoard);
       this.newBoard = { title: "", description: "" };
+    },
+    setActiveBoard(board) {
+      console.log("boards", board);
+
+      this.$store.commit("setActiveBoard", board);
     }
   }
 };

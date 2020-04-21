@@ -11,7 +11,14 @@ export default {
   data() {
     return {};
   },
-  computed: {},
+  computed: {
+    profile() {
+      return this.$store.state.user;
+    }
+  },
+  mounted() {
+    this.$store.dispatch("getProfile");
+  },
   methods: {},
   components: {}
 };
