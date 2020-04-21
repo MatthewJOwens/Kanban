@@ -21,6 +21,7 @@ export default new Vuex.Store({
     activeBoard: {},
     lists: [],
     tasks: [],
+    comments: []
   },
   mutations: {
     setUser(state, user) {

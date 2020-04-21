@@ -1,7 +1,8 @@
 <template>
   <div class="listComponent p-2 mb-2 shadow rounded">
     <!-- <div class="col-3"></div> -->
-  <Task v-for="task in tasks" :key="task.id" :taskData="task">{{task.title}}</Task>
+    {{listData.title}}
+    <Task v-for="task in tasks" :key="task.id" :taskData="task">{{task.title}}</Task>
   </div>
 </template>
 
@@ -13,11 +14,9 @@ export default {
   data() {
     return {};
   },
-  props: [
-    "listData"
-  ],
+  props: ["listData"],
   mounted() {
-    this.$store.dispatch("getTasks", this.listData.id)
+    this.$store.dispatch("getTasks", this.listData.id);
   },
   computed: {
     tasks() {
@@ -26,7 +25,7 @@ export default {
   },
   methods: {},
   components: {
-    Task,
+    Task
   }
 };
 </script>

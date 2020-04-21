@@ -3,18 +3,12 @@
     <h1 v-if="board.title">{{board.title}}</h1>
     <h1 v-else>Loading...</h1>
     <div class="d-flex flex-row items-start">
-      <List
-        v-for="list in lists"
-        :key="list.id"
-        :listData="list"
-      >The list component has not loaded.</List>
+      <List v-for="list in lists" :key="list.id" :listData="list">The list component has not loaded.</List>
       <div v-if="showList">
         <input type="text" v-model="newList.title" placeholder="List title" />
         <button class="btn btn-primary" @submit.prevent="addList()">Submit</button>
       </div>
-      <div v-else @click="showList = !showList">Add List
-      </div>
-      <p>{{lists}}</p>
+      <div v-else @click="showList = !showList">Add List</div>
     </div>
   </div>
 </template>
