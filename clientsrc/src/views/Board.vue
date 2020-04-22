@@ -1,5 +1,6 @@
 <template>
   <div class="board">
+    <!-- //TODO fix resizing issue with modal -->
     <h1 v-if="board.title && !editing" @click="editing = !editing">{{board.title}}</h1>
     <div v-else-if="board.title && editing">
       <input v-model="board.title" @keyup.enter="editBoardTitle()" />

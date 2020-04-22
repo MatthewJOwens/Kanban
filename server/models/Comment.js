@@ -17,6 +17,7 @@ Comment.virtual("creator",
     justOne: true
   })
 
+
 //CASCADE ON DELETE
 Comment.pre('deleteMany', function (next) {
   //lets find all the lists and remove them

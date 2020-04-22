@@ -143,6 +143,10 @@ export default new Vuex.Store({
       } catch (error) {
         console.error(error)
       }
+    },
+    async addComment({ commit, dispatch }, newComment) {
+      let res = await api.post("comments", newComment)
+      // dispatch("getComments", newComment)
     }
     //#endregion
   }
