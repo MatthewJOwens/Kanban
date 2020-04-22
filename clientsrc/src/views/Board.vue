@@ -11,8 +11,13 @@
       <List v-for="list in lists" :key="list.id" :listData="list">The list component has not loaded.</List>
       <div class="min-width-272 p-2 shadow rounded bg-white m-2">
         <div v-if="showList">
-          <input type="text" v-model="newList.title" placeholder="List title" />
-          <button class="btn btn-sm btn-primary" @submit.prevent="addList()">Submit</button>
+          <input
+            type="text"
+            v-model="newList.title"
+            placeholder="List title"
+            @keyup.enter="addList()"
+          />
+          <button class="btn btn-sm btn-primary" @click="addList()">Submit</button>
         </div>
         <div @click="showList = !showList" v-else>+ Add List</div>
       </div>
@@ -53,9 +58,9 @@ export default {
   methods: {
     addList() {
       // TODO Finish writing method to add Column after writing back end
-      // this.newColumn.
+      this.newList.boardId = this.board.id;
+      this.$store.dispatch("addList", this.newList);
       this.showList = false;
-      // this.$store.dispatch("addList", this.newList);
       // TODO need to add to store
     },
     editBoardTitle() {

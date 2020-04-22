@@ -1,9 +1,10 @@
 <template>
   <div class="list p-2 shadow rounded bg-white m-2 h-100">
     <!-- <div class="col-3"></div> -->
-    <h6>
+    <h6 v-if="!editing">
       <b>{{listData.title}}</b>
     </h6>
+    <input v-else type="text" width="20" @keyup.enter="editListTitle()" />
     <Task v-for="task in tasks" :key="task.id" :taskData="task"></Task>
     <div>
       <input

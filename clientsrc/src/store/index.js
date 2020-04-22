@@ -109,6 +109,14 @@ export default new Vuex.Store({
         console.error(err)
       }
     },
+    async addList({ commit, dispatch }, newList) {
+      try {
+        let res = await api.post("lists", newList)
+        dispatch("getLists", newList.boardId)
+      } catch (error) {
+        console.error(error)
+      }
+    },
 
 
     //#endregion
