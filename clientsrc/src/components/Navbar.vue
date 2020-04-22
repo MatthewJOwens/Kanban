@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <router-link class="navbar-brand" :to="{ name: 'home' }">看板</router-link>
+    <router-link class="navbar-brand pl-3" :to="{ name: 'home' }">看板</router-link>
     <button
       class="navbar-toggler"
       type="button"
@@ -26,7 +26,7 @@
         </li>
       </ul>
       <!-- <div class="px-3" v-if="$auth.isAuthenticated">{{profile.name}}</div> -->
-      <span class="navbar-text">
+      <span class="navbar-text px-3">
         <button class="btn btn-success" @click="login" v-if="!$auth.isAuthenticated">Login</button>
         <button class="btn btn-danger" @click="logout" v-else>Logout</button>
       </span>
@@ -64,4 +64,5 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+</style>

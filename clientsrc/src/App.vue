@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <navbar />
+    <navbar id="nav" />
+    <div class="mb-5 p-2"></div>
     <router-view />
   </div>
 </template>
@@ -40,7 +41,11 @@ export default {
 }
 
 #nav {
-  padding: 30px;
+  padding: 0px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 #nav a {

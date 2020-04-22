@@ -85,7 +85,13 @@ export default new Vuex.Store({
         commit('setActiveBoard', res.data)
       } catch (error) {
         console.error(error);
-
+      }
+    },
+    async editBoardTitle({ commit, dispatch }, board) {
+      try {
+        await api.put('boards/' + board.id, board)
+      } catch (error) {
+        console.error(error)
       }
     },
     //#endregion

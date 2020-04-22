@@ -1,6 +1,10 @@
 <template>
   <div class="board">
-    <h1 v-if="board.title">{{board.title}}</h1>
+    <h1 v-if="board.title && !editing" @click="editing = !editing">{{board.title}}</h1>
+    <div v-else-if="board.title && editing">
+      <input v-model="board.title" @keyup.enter="editBoardTitle()" />
+      <button class="btn btn-success" @click="editBoardTitle()">OK</button>
+    </div>
     <h1 v-else>Loading...</h1>
     <div class="d-flex flex-row items-start">
       <List v-for="list in lists" :key="list.id" :listData="list">The list component has not loaded.</List>
@@ -22,7 +26,8 @@ export default {
   data() {
     return {
       showList: false,
-      newList: {}
+      newList: {},
+      editing: false
     };
   },
   computed: {
@@ -51,6 +56,10 @@ export default {
       this.showList = false;
       // this.$store.dispatch("addList", this.newList);
       // TODO need to add to store
+    },
+    editBoardTitle() {
+      this.$store.dispatch("editBoardTitle", this.board);
+      this.editing = false;
     }
   },
   props: ["boardId"],
@@ -64,4 +73,5 @@ export default {
   min-width: 272px;
   height: 100%;
 }
+/* @onmouseover and v-show */
 </style>
