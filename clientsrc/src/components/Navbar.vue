@@ -25,7 +25,7 @@
           <router-link class="nav-link" :to="{ name: 'boards' }">My-Dashboard</router-link>
         </li>
       </ul>
-      <div class="px-3" v-if="$auth.isAuthenticated">{{profile.name}}</div>
+      <!-- <div class="px-3" v-if="$auth.isAuthenticated">{{profile.name}}</div> -->
       <span class="navbar-text">
         <button class="btn btn-success" @click="login" v-if="!$auth.isAuthenticated">Login</button>
         <button class="btn btn-danger" @click="logout" v-else>Logout</button>
@@ -53,7 +53,7 @@ export default {
     },
     async logout() {
       this.$store.dispatch("resetBearer");
-      await this.$auth.logout({returnTo: window.location.origin});
+      await this.$auth.logout({ returnTo: window.location.origin });
     }
   },
   computed: {

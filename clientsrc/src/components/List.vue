@@ -1,8 +1,15 @@
 <template>
-  <div class="list p-2 mb-2 shadow rounded">
+  <div class="list p-2 shadow rounded bg-white m-2">
     <!-- <div class="col-3"></div> -->
     {{listData.title}}
     <Task v-for="task in tasks" :key="task.id" :taskData="task"></Task>
+    <div>
+      <input
+        type="text"
+        placeholder="+ Add task"
+        class="w-100 rounded block py-0 m-0 bg-transparent text-center"
+      />
+    </div>
   </div>
 </template>
 
@@ -33,6 +40,7 @@ export default {
 
 <style scoped>
 .list {
-  min-width: 350px;
+  min-width: 272px;
+  height: 100%;
 }
 </style>

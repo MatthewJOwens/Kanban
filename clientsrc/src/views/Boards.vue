@@ -43,8 +43,6 @@ export default {
       this.newBoard = { title: "", description: "" };
     },
     setActiveBoard(board) {
-      console.log("boards", board);
-
       this.$store.commit("setActiveBoard", board);
     }
   }

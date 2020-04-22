@@ -58,23 +58,7 @@ export default new Vuex.Store({
       }
     },
     //#endregion
-    async getLists({ commit, dispatch }, boardId) {
-      try {
-        let res = await api.get("/boards/" + boardId + "/lists")
-        commit("setLists", res.data)
-      } catch (err) {
-        console.error(err)
-      }
-    },
 
-    async getTasks({ commit, dispatch }, listId) {
-      try {
-        let res = await api.get("/lists/" + listId + "/tasks")
-        commit("setTasks", {data: res.data, listId: listId})
-      } catch (err) {
-        console.error(err)
-      }
-    },
 
     //#region -- BOARDS --
     async getBoards({ commit, dispatch }) {
@@ -97,19 +81,43 @@ export default new Vuex.Store({
     },
     async getActiveBoard({ commit, dispatch }, board) {
       try {
-        let res = await api.get('boards/' + board.id)
+        let res = await api.get('boards/' + board)
         commit('setActiveBoard', res.data)
       } catch (error) {
         console.error(error);
 
       }
-    }
+    },
     //#endregion
 
 
     //#region -- LISTS --
+    async getLists({ commit, dispatch }, boardId) {
+      try {
+        let res = await api.get("/boards/" + boardId + "/lists")
+        commit("setLists", res.data)
+      } catch (err) {
+        console.error(err)
+      }
+    },
 
 
+    //#endregion
+
+    //#region -- TASKS --
+    async getTasks({ commit, dispatch }, listId) {
+      try {
+        let res = await api.get("/lists/" + listId + "/tasks")
+        commit("setTasks", { data: res.data, listId: listId })
+      } catch (err) {
+        console.error(err)
+      }
+    },
+
+    //#endregion
+
+
+    //#region -- COMMENTS --
 
     //#endregion
   }

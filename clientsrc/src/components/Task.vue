@@ -1,5 +1,7 @@
 <template>
-  <div class="Task">{{taskData.title}}</div>
+  <div
+    class="Task bg-dark text-white m-2 align-items-center text-left rounded p-2"
+  >{{taskData.title}}</div>
 </template>
 
 
@@ -11,7 +13,6 @@ export default {
   data() {
     return {};
   },
-  mounted() {},
   computed: {
     // comments(){
     //   return this.$store.state.comments

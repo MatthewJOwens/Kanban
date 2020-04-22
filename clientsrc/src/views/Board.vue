@@ -4,11 +4,13 @@
     <h1 v-else>Loading...</h1>
     <div class="d-flex flex-row items-start">
       <List v-for="list in lists" :key="list.id" :listData="list">The list component has not loaded.</List>
-      <div v-if="showList">
-        <input type="text" v-model="newList.title" placeholder="List title" />
-        <button class="btn btn-primary" @submit.prevent="addList()">Submit</button>
+      <div class="min-width-272 p-2 shadow rounded bg-white m-2">
+        <div v-if="showList">
+          <input type="text" v-model="newList.title" placeholder="List title" />
+          <button class="btn btn-sm btn-primary" @submit.prevent="addList()">Submit</button>
+        </div>
+        <div @click="showList = !showList" v-else>+ Add List</div>
       </div>
-      <div v-else @click="showList = !showList">Add List</div>
     </div>
   </div>
 </template>
@@ -28,23 +30,26 @@ export default {
       //FIXME This does not work on page reload because the activeBoard is empty in the store
       return this.$store.state.activeBoard;
     },
-    profile() {
-      return this.$store.state.user;
-    },
+    // profile() {
+    //   return this.$store.state.user;
+    // },
     lists() {
       return this.$store.state.lists;
     }
   },
   created() {
-    this.$store.dispatch("getProfile");
+    // this.$store.dispatch("getProfile");
     this.$store.dispatch("getActiveBoard", this.$route.params.boardId);
+  },
+  mounted() {
     this.$store.dispatch("getLists", this.$route.params.boardId);
   },
   methods: {
     addList() {
       // TODO Finish writing method to add Column after writing back end
       // this.newColumn.
-      this.$store.dispatch("addList", this.newList);
+      this.showList = false;
+      // this.$store.dispatch("addList", this.newList);
       // TODO need to add to store
     }
   },
@@ -54,3 +59,9 @@ export default {
   }
 };
 </script>
+<style>
+.min-width-272 {
+  min-width: 272px;
+  height: 100%;
+}
+</style>
