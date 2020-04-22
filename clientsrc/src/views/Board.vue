@@ -17,7 +17,6 @@
             placeholder="List title"
             @keyup.enter="addList()"
           />
-          <button class="btn btn-sm btn-primary" @click="addList()">Submit</button>
         </div>
         <div @click="showList = !showList" v-else>+ Add List</div>
       </div>

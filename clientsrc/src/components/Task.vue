@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     getComments() {
-      this.$store.dispatch("getComments", this.taskData);
+      this.$store.dispatch("getComments", this.taskData.id);
     },
     async addComment() {
       this.newComment.creatorName = this.$auth.user.name;

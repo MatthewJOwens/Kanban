@@ -117,6 +117,13 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
+    async editListTitle({ commit, dispatch }, listData) {
+      try {
+        await api.put('lists/' + listData.id, listData)
+      } catch (error) {
+        console.error(error)
+      }
+    },
 
 
     //#endregion
@@ -138,14 +145,20 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
-
+    async deleteTask({ commit, dispatch }, taskData) {
+      try {
+        await api.delete("tasks/" + taskData.id)
+      } catch (error) {
+        console.error(error)
+      }
+    },
     //#endregion
 
 
     //#region -- COMMENTS --
-    async getComments({ commit, dispatch }, taskData) {
+    async getComments({ commit, dispatch }, taskId) {
       try {
-        let res = await api.get('tasks/' + taskData.id + '/comments')
+        let res = await api.get('tasks/' + taskId + '/comments')
         console.log("comments", res.data)
         commit("setComments", res.data)
       } catch (error) {
@@ -155,7 +168,14 @@ export default new Vuex.Store({
     async addComment({ commit, dispatch }, newComment) {
       let res = await api.post("comments", newComment)
       // dispatch("getComments", newComment)
-    }
+    },
+    async deleteComment({ commit, dispatch }, commentData) {
+      try {
+        await api.delete("comments/" + commentData.id)
+      } catch (error) {
+        console.error(error)
+      }
+    },
     //#endregion
   }
 })
