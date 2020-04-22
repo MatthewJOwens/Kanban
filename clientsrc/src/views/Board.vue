@@ -4,7 +4,9 @@
     <h1 v-if="board.title && !editing" @click="editing = !editing">{{board.title}}</h1>
     <div v-else-if="board.title && editing">
       <input v-model="board.title" @keyup.enter="editBoardTitle()" />
-      <button class="btn btn-success" @click="editBoardTitle()">OK</button>
+      <small>
+        <span @click.stop="deleteBoard(board.id)" class="far fa-trash-alt text-danger"></span>
+      </small>
     </div>
     <h1 v-else>Loading...</h1>
     <div class="d-flex flex-row items-start">
@@ -65,6 +67,13 @@ export default {
     editBoardTitle() {
       this.$store.dispatch("editBoardTitle", this.board);
       this.editing = false;
+    },
+    async deleteBoard(id) {
+      let confirm = window.confirm("Are you sure you wish to delete?");
+      if (confirm) {
+        await this.$store.dispatch("deleteBoard", id);
+        this.$router.push({ name: "boards" });
+      }
     }
   },
   props: ["boardId"],

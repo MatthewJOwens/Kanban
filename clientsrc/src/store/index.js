@@ -97,6 +97,13 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
+    async deleteBoard({ commit, dispatch }, boardId) {
+      try {
+        await api.delete("boards/" + boardId)
+      } catch (error) {
+        console.error(error)
+      }
+    },
     //#endregion
 
 
@@ -120,6 +127,13 @@ export default new Vuex.Store({
     async editListTitle({ commit, dispatch }, listData) {
       try {
         await api.put('lists/' + listData.id, listData)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async deleteList({ commit, dispatch }, listData) {
+      try {
+        await api.delete("lists/" + listData.id)
       } catch (error) {
         console.error(error)
       }

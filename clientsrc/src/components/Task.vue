@@ -1,7 +1,23 @@
 <template>
   <div class="Task bg-dark text-white m-2 align-items-center text-left rounded p-2">
-    <div data-toggle="modal" :data-target="'#taskModal-'+ taskData.id" @click="getComments()">
-      <b>{{taskData.title}}</b>
+    <div
+      @mouseover="show=true"
+      @mouseleave="show=false"
+      class="d-flex justify-content-between"
+      data-toggle="modal"
+      :data-target="'#taskModal-'+ taskData.id"
+      @click="getComments()"
+    >
+      <div>
+        <b>
+          <small>{{taskData.title}}</small>
+        </b>
+      </div>
+      <span @click.stop="deleteTask()" v-show="show">
+        <small>
+          <i class="far fa-trash-alt text-danger"></i>
+        </small>
+      </span>
     </div>
     <!-- Modal -->
     <div
@@ -44,10 +60,8 @@ export default {
   props: ["taskData"],
   data() {
     return {
-      newComment: {
-        // creatorName: this.$auth.user.name,
-        // creatorEmail: this.$auth.user.email
-      }
+      newComment: {},
+      show: false
     };
   },
   computed: {
@@ -67,6 +81,10 @@ export default {
       await this.$store.dispatch("addComment", this.newComment);
       this.newComment = {};
       this.getComments();
+    },
+    async deleteTask() {
+      await this.$store.dispatch("deleteTask", this.taskData);
+      this.$store.dispatch("getTasks", this.taskData.listId);
     }
   },
   components: {

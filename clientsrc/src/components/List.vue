@@ -1,10 +1,16 @@
 <template>
   <div class="list p-2 shadow rounded bg-white m-2 h-100">
-    <!-- <div class="col-3"></div> -->
-    <h6 v-if="!editing" @click="editing = true">
-      <b>{{listData.title}}</b>
-    </h6>
-    <input v-else type="text" width="20" @keyup.enter="editListTitle()" v-model="listData.title" />
+    <div>
+      <h6 v-if="!editing" @click="editing = true">
+        <b>{{listData.title}}</b>
+      </h6>
+      <div v-else>
+        <input type="text" width="20" @keyup.enter="editListTitle()" v-model="listData.title" />
+        <small>
+          <span @click.stop="deleteList()" class="far fa-trash-alt text-danger"></span>
+        </small>
+      </div>
+    </div>
     <Task v-for="task in tasks" :key="task.id" :taskData="task"></Task>
     <div>
       <input
@@ -20,6 +26,8 @@
 </template>
 
 
+
+
 <script>
 import Task from "../components/Task.vue";
 export default {
@@ -28,7 +36,8 @@ export default {
   data() {
     return {
       newTask: {},
-      editing: false
+      editing: false,
+      show: false
     };
   },
   props: ["listData"],
@@ -49,6 +58,10 @@ export default {
     editListTitle() {
       this.$store.dispatch("editListTitle", this.listData);
       this.editing = false;
+    },
+    async deleteList() {
+      await this.$store.dispatch("deleteList", this.listData);
+      this.$store.dispatch("getLists", this.listData.boardId);
     }
   },
   components: {
