@@ -40,6 +40,9 @@ export default new Vuex.Store({
       // state.tasks = tasks
       Vue.set(state.tasks, tasks.listId, tasks.data)
     },
+    setComments(state, comments) {
+      state.comments = comments
+    },
   },
   actions: {
     //#region -- AUTH STUFF --
@@ -119,12 +122,28 @@ export default new Vuex.Store({
         console.error(err)
       }
     },
+    async addTask({ commit, dispatch }, newTask) {
+      try {
+        let res = await api.post("tasks", newTask)
+        dispatch("getTasks", newTask.listId)
+      } catch (error) {
+        console.error(error)
+      }
+    },
 
     //#endregion
 
 
     //#region -- COMMENTS --
-
+    async getComments({ commit, dispatch }, taskData) {
+      try {
+        let res = await api.get('tasks/' + taskData.id + '/comments')
+        console.log("comments", res.data)
+        commit("setComments", res.data)
+      } catch (error) {
+        console.error(error)
+      }
+    }
     //#endregion
   }
 })
