@@ -1,12 +1,17 @@
 <template>
   <div class="comment">
-    {{commentData.body}}
-    -{{commentData.creatorName}}
-    <button
-      class="btn btn-warning btn-sm"
-      type="button"
-      @click="deleteComment()"
-    />
+    <div @mouseover="show=true" @mouseleave="show=false">
+      {{commentData.body}}
+      -{{commentData.creatorName}}
+      <span
+        @click="deleteComment()"
+        v-show="show"
+      >
+        <small>
+          <i class="far fa-trash-alt text-danger"></i>
+        </small>
+      </span>
+    </div>
   </div>
 </template>
 
@@ -16,7 +21,9 @@ export default {
   name: "comment",
   props: ["commentData"],
   data() {
-    return {};
+    return {
+      show: false
+    };
   },
   computed: {},
   methods: {
