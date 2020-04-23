@@ -1,14 +1,13 @@
 <template>
   <div class="board">
     <!-- //TODO fix resizing issue with modal -->
-    <h1 v-if="board.title && !editing" @click="editing = !editing">{{board.title}}</h1>
-    <div v-else-if="board.title && editing">
-      <input v-model="board.title" @keyup.enter="editBoardTitle()" />
+    <h1 v-if="!editing"><span @click="editing = !editing">{{board.title}}</span></h1>
+    <div v-else>
+      <input v-model="board.title" @keyup.enter="editBoardTitle()"/>
       <small>
         <span @click.stop="deleteBoard(board.id)" class="far fa-trash-alt text-danger"></span>
       </small>
     </div>
-    <h1 v-else>Loading...</h1>
     <div class="d-flex flex-row items-start">
       <List v-for="list in lists" :key="list.id" :listData="list">The list component has not loaded.</List>
       <div class="min-width-272 p-2 shadow rounded bg-white m-2">
@@ -65,6 +64,7 @@ export default {
       // TODO need to add to store
     },
     editBoardTitle() {
+      if (this.board.title == "") {this.board.title = "Untitled"}
       this.$store.dispatch("editBoardTitle", this.board);
       this.editing = false;
     },
