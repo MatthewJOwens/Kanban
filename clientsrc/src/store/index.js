@@ -21,7 +21,8 @@ export default new Vuex.Store({
     activeBoard: {},
     lists: [],
     tasks: {},
-    comments: []
+    comments: [],
+    tempTask: {}
   },
   mutations: {
     setUser(state, user) {
@@ -42,6 +43,9 @@ export default new Vuex.Store({
     },
     setComments(state, comments) {
       state.comments = comments
+    },
+    setTempTask(state, task) {
+      state.tempTask = task
     },
   },
   actions: {
@@ -165,6 +169,18 @@ export default new Vuex.Store({
       } catch (error) {
         console.error(error)
       }
+    },
+    async moveTask({ commit, dispatch }, object) {
+      //find task we're moving
+      //get id of list we're moving to out of the object and PUT task id with new list ID
+      try {
+        await api.put('tasks/' + object.id, object)
+        dispatch('getTasks', object.listId)
+        dispatch('getTasks', object.oldList)
+      } catch (error) {
+        console.error(error)
+      }
+
     },
     //#endregion
 

@@ -1,5 +1,8 @@
 <template>
-  <div class="Task bg-dark text-white m-2 align-items-center text-left rounded p-2">
+  <div
+    class="Task bg-dark text-white m-2 align-items-center text-left rounded p-2"
+    @dragstart="startMove()"
+  >
     <div
       @mouseover="show=true"
       @mouseleave="show=false"
@@ -85,6 +88,9 @@ export default {
     async deleteTask() {
       await this.$store.dispatch("deleteTask", this.taskData);
       this.$store.dispatch("getTasks", this.taskData.listId);
+    },
+    startMove() {
+      this.$emit("dragstart");
     }
   },
   components: {

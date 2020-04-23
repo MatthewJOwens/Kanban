@@ -1,5 +1,10 @@
 <template>
-  <div class="list p-2 shadow rounded bg-white m-2 h-100">
+  <div
+    class="list p-2 shadow rounded bg-white m-2 h-100"
+    @drop="moveTask($event)"
+    @dragenter.prevent
+    @dragover.prevent
+  >
     <div>
       <h6 v-if="!editing" @click="editing = true">
         <b>{{listData.title}}</b>
@@ -11,7 +16,13 @@
         </small>
       </div>
     </div>
-    <Task v-for="task in tasks" :key="task.id" :taskData="task"></Task>
+    <Task
+      v-for="task in tasks"
+      :key="task.id"
+      :taskData="task"
+      draggable
+      @dragstart="pickupTask(task)"
+    ></Task>
     <div>
       <input
         type="text"
@@ -37,7 +48,8 @@ export default {
     return {
       newTask: {},
       editing: false,
-      show: false
+      show: false,
+      movedTask: {}
     };
   },
   props: ["listData"],
@@ -47,6 +59,9 @@ export default {
   computed: {
     tasks() {
       return this.$store.state.tasks[this.listData.id];
+    },
+    tempTask() {
+      return this.$store.state.tempTask;
     }
   },
   methods: {
@@ -62,6 +77,21 @@ export default {
     async deleteList() {
       await this.$store.dispatch("deleteList", this.listData);
       this.$store.dispatch("getLists", this.listData.boardId);
+    },
+    pickupTask(task) {
+      this.$store.commit("setTempTask", task);
+    },
+    moveTask(e) {
+      //get id of task we're moving
+      //find id of list we're moving to.
+
+      //make object to PUT
+      this.movedTask.oldList = this.tempTask.listId;
+      this.movedTask.listId = this.listData.id;
+      this.movedTask.id = this.tempTask.id;
+      console.log("movedTask:", this.movedTask);
+      //PUT object
+      this.$store.dispatch("moveTask", this.movedTask);
     }
   },
   components: {
