@@ -43,7 +43,7 @@
             <p>{{taskData.description}}</p>
             <br />
             <Comment v-for="comment in comments" :key="comment.id" :commentData="comment" />
-            <input @keyup.enter="addComment()" v-model="newComment.body" />
+            <input @keyup.enter="addComment()" v-model="newComment.body" class="w-100"/>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -83,7 +83,7 @@ export default {
       console.log(this.newComment);
       await this.$store.dispatch("addComment", this.newComment);
       this.newComment = {};
-      this.getComments();
+      // this.getComments();
     },
     async deleteTask() {
       await this.$store.dispatch("deleteTask", this.taskData);

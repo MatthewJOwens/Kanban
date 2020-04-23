@@ -9,7 +9,7 @@
       <h6 v-if="!editing" @click="editing = true">
         <b>{{listData.title}}</b>
       </h6>
-      <div v-else>
+      <div v-else class="mb-2">
         <input type="text" width="20" @keyup.enter="editListTitle()" v-model="listData.title" />
         <small>
           <span @click.stop="deleteList()" class="far fa-trash-alt text-danger"></span>

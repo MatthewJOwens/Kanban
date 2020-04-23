@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <navbar id="nav" />
-    <div class="mb-5 p-2"></div>
+    <!-- <div class="marginish"></div> -->
     <router-view />
   </div>
 </template>
@@ -33,7 +33,7 @@ export default {
 @import "./assets/_overrides.scss";
 
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+font-family: 'Didact Gothic', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -46,14 +46,18 @@ export default {
   top: 0;
   left: 0;
   right: 0;
+  background-color: rgba(50, 50, 50, 0.4);
 }
 
 #nav a {
-  font-weight: bold;
+  font-weight: 600;
   color: #2c3e50;
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: #2c3e50;
+}
+.marginish{
+  height: 5vh;
 }
 </style>

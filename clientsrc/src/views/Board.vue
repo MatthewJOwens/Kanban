@@ -1,8 +1,8 @@
 <template>
   <div class="board">
     <!-- //TODO fix resizing issue with modal -->
-    <h1 v-if="!editing"><span @click="editing = !editing">{{board.title}}</span></h1>
-    <div v-else>
+    <h1 v-if="!editing" class="margin-board-top mb-3" ><span @click="editing = !editing">{{board.title}}</span></h1>
+    <div v-else class="margin-board-top mb-3" >
       <input v-model="board.title" @keyup.enter="editBoardTitle()"/>
       <small>
         <span @click.stop="deleteBoard(board.id)" class="far fa-trash-alt text-danger"></span>
@@ -57,11 +57,10 @@ export default {
   },
   methods: {
     addList() {
-      // TODO Finish writing method to add Column after writing back end
       this.newList.boardId = this.board.id;
       this.$store.dispatch("addList", this.newList);
       this.showList = false;
-      // TODO need to add to store
+      newList = {}
     },
     editBoardTitle() {
       if (this.board.title == "") {this.board.title = "Untitled"}
@@ -86,6 +85,9 @@ export default {
 .min-width-272 {
   min-width: 272px;
   height: 100%;
+}
+.margin-board-top{
+  padding-top: 15vh;
 }
 /* @onmouseover and v-show */
 </style>

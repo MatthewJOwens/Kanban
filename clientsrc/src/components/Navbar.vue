@@ -1,6 +1,7 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <router-link class="navbar-brand pl-3" :to="{ name: 'home' }">看板</router-link>
+  <nav class="navbar navbar-expand-lg bg-nav">
+    <div class="container-fluid">
+    <h1 class="navbar-brand kanji m-0 p-0">看板</h1>
     <button
       class="navbar-toggler"
       type="button"
@@ -14,7 +15,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item" :class="{ active: $route.name == 'home' }">
+        <li v-if="!this.$auth.isAuthenticated" class="nav-item" :class="{ active: $route.name == 'home' }">
           <router-link :to="{ name: 'home' }" class="nav-link">Home</router-link>
         </li>
         <li
@@ -22,15 +23,18 @@
           v-if="$auth.isAuthenticated"
           :class="{ active: $route.name == 'boards' }"
         >
-          <router-link class="nav-link" :to="{ name: 'boards' }">My-Dashboard</router-link>
+          <router-link class="nav-link" :to="{ name: 'boards' }">Home</router-link>
         </li>
       </ul>
-      <!-- <div class="px-3" v-if="$auth.isAuthenticated">{{profile.name}}</div> -->
-      <span class="navbar-text px-3">
-        <button class="btn btn-success" @click="login" v-if="!$auth.isAuthenticated">Login</button>
-        <button class="btn btn-danger" @click="logout" v-else>Logout</button>
+      <div class="px-3 text-light" v-if="$auth.isAuthenticated">{{profile.name}}</div>
+      <span class="navbar-text">
+        <!-- <button class="btn btn-bg text-light p-1" @click="login" v-if="!$auth.isAuthenticated">Login</button> -->
+        <button class="btn btn-danger p-1 btn-logout" @click="logout" v-if="$auth.isAuthenticated">Logout</button>
       </span>
+    
     </div>
+    
+    </div>    
   </nav>
 </template>
 
@@ -44,16 +48,17 @@ let _api = axios.create({
 export default {
   name: "Navbar",
   methods: {
-    async login() {
-      await this.$auth.loginWithPopup();
-      this.$store.dispatch("setBearer", this.$auth.bearer);
-      this.$store.dispatch("getProfile");
-      console.log("this.$auth.user: ");
-      console.log(this.$auth.user);
-    },
+    // async login() {
+    //   await this.$auth.loginWithPopup();
+    //   this.$store.dispatch("setBearer", this.$auth.bearer);
+    //   this.$store.dispatch("getProfile");
+    //   console.log("this.$auth.user: ");
+    //   console.log(this.$auth.user);
+    //   this.$router.push("boards")
+    // },
     async logout() {
       this.$store.dispatch("resetBearer");
-      await this.$auth.logout({ returnTo: window.location.origin });
+      await this.$auth.logout({returnTo: window.location.origin});
     }
   },
   computed: {
@@ -65,4 +70,14 @@ export default {
 </script>
 
 <style>
+.kanji{
+  font-family: 'Ma Shan Zheng', cursive; 
+}
+.bg-nav {
+  background-color: rgba(50, 50, 50, 0.4);
+}
+.btn-logout {
+  background-color: red;
+  font-weight: 550!important;
+}
 </style>

@@ -197,7 +197,8 @@ export default new Vuex.Store({
     },
     async addComment({ commit, dispatch }, newComment) {
       let res = await api.post("comments", newComment)
-      // dispatch("getComments", newComment)
+      console.log("object??", newComment);
+      dispatch("getComments", newComment.taskId)
     },
     async deleteComment({ commit, dispatch }, commentData) {
       try {
