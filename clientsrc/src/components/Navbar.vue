@@ -77,7 +77,6 @@ export default {
   background-color: rgba(50, 50, 50, 0.4);
 }
 .btn-logout {
-  background-color: red;
   font-weight: 550!important;
 }
 </style>

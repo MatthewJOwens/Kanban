@@ -27,7 +27,7 @@
       <input
         type="text"
         placeholder="+ Add task"
-        class="w-100 rounded block py-0 m-0 bg-transparent text-center"
+        class="w-100 rounded block py-0 m-0 bg-card text-center navy-font"
         v-model="newTask.title"
         @keyup.enter="addTask(listData.id)"
         @keyup.esc="toggleEditing()"
@@ -104,5 +104,12 @@ export default {
 <style scoped>
 .list {
   min-width: 272px;
+}
+.navy-font{
+  color: #2c3e50;
+}
+.bg-card {
+  background-color: rgba(255, 255, 255, 0.5)!important;
+
 }
 </style>

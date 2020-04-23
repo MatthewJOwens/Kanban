@@ -1,6 +1,6 @@
 <template>
   <div
-    class="Task bg-dark text-white m-2 align-items-center text-left rounded p-2"
+    class="Task bg-navy text-white m-2 align-items-center text-left rounded p-2"
     @dragstart="startMove()"
   >
     <div
@@ -101,4 +101,7 @@ export default {
 
 
 <style scoped>
+.bg-navy {
+  background-color: rgba(44, 62, 80, 0.7);
+}
 </style>

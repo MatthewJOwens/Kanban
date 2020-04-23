@@ -1,4 +1,5 @@
 <template>
+<div class="bg-fuji fullheight">
   <div class="board">
     <!-- //TODO fix resizing issue with modal -->
     <h1 v-if="!editing" class="margin-board-top mb-3" ><span @click="editing = !editing">{{board.title}}</span></h1>
@@ -9,8 +10,8 @@
       </small>
     </div>
     <div class="d-flex flex-row items-start">
-      <List v-for="list in lists" :key="list.id" :listData="list">The list component has not loaded.</List>
-      <div class="min-width-272 p-2 shadow rounded bg-white m-2">
+      <List class="bg-card" v-for="list in lists" :key="list.id" :listData="list">The list component has not loaded.</List>
+      <div class="min-width-272 p-2 shadow rounded m-2 navy-font">
         <div v-if="showList">
           <input
             type="text"
@@ -19,9 +20,10 @@
             @keyup.enter="addList()"
           />
         </div>
-        <div @click="showList = !showList" v-else>+ Add List</div>
+        <div class="" @click="showList = !showList" v-else>+ Add List</div>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -60,7 +62,7 @@ export default {
       this.newList.boardId = this.board.id;
       this.$store.dispatch("addList", this.newList);
       this.showList = false;
-      newList = {}
+      newList.title = {}
     },
     editBoardTitle() {
       if (this.board.title == "") {this.board.title = "Untitled"}
@@ -90,4 +92,13 @@ export default {
   padding-top: 15vh;
 }
 /* @onmouseover and v-show */
+.bg-card {
+  background-color: rgba(255, 255, 255, 0.5)!important;
+
+}
+.navy-font{
+  color: #2c3e50;
+    background-color: rgba(255, 255, 255, 0.5)!important;
+
+}
 </style>
